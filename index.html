@@ -3,17 +3,24 @@
 <body>
 <h1>テスト</h1>
 
-<span id="fname"></span> 
+<span id="fname" style="color: red;"></span> <!-- テキストを赤色で表示 -->
 
 <script>
-// ページがフォーカスを失ったときにアラートを表示
+// 現在時刻をフォーマットする関数
+function formatTime(date) {
+  return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+}
+
+// ページがフォーカスを失ったときにアラートを表示し、時刻を含める
 window.addEventListener("blur", function() {
-  alert("サイトから離れました");
+  var time = formatTime(new Date()); // 現在の時刻
+  alert("サイトから離れました。時刻: " + time);
 });
 
-// ページにフォーカスが戻ったときに<span>要素にメッセージを表示
+// ページにフォーカスが戻ったときに<span>要素にメッセージと時刻を表示
 window.addEventListener("focus", function() {
-  document.getElementById("fname").textContent = "フォーカスが戻りました"; // .valueの代わりに.textContentを使用
+  var time = formatTime(new Date()); // 現在の時刻
+  document.getElementById("fname").textContent = "フォーカスが戻りました。時刻: " + time;
 });
 </script>
 
