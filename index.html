@@ -3,24 +3,32 @@
 <body>
 <h1>テスト</h1>
 
-<span id="fname" style="color: red;"></span> <!-- テキストを赤色で表示 -->
+<!-- スタイルを追加してテキストを赤色に -->
+<span id="fname" style="color: red;"></span>
 
 <script>
-// 現在時刻をフォーマットする関数
-function formatTime(date) {
-  return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+function getCurrentTime() {
+  return new Date().toLocaleTimeString();
 }
 
-// ページがフォーカスを失ったときにアラートを表示し、時刻を含める
+// ページがフォーカスを失ったときにアラートを表示し、時間を含める
 window.addEventListener("blur", function() {
-  var time = formatTime(new Date()); // 現在の時刻
-  alert("サイトから離れました。時刻: " + time);
+  const time = getCurrentTime();
+  alert("サイトから離れました - " + time);
 });
 
-// ページにフォーカスが戻ったときに<span>要素にメッセージと時刻を表示
+// ページにフォーカスが戻ったときに<span>要素にメッセージと時間を表示
 window.addEventListener("focus", function() {
-  var time = formatTime(new Date()); // 現在の時刻
-  document.getElementById("fname").textContent = "フォーカスが戻りました。時刻: " + time;
+  const time = getCurrentTime();
+  document.getElementById("fname").textContent = "フォーカスが戻りました - " + time;
+});
+
+// タブやブラウザが閉じられる前に実行
+window.addEventListener("beforeunload", function(e) {
+  const time = getCurrentTime();
+  const message = "ページを離れようとしています　- "　 + time;
+  e.returnValue = message; // 一部のブラウザでは、この値が確認ダイアログに表示されます。
+  return message; // 古いブラウザのサポート
 });
 </script>
 
