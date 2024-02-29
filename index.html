@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>テスト</h1>
+
+<span id="fname"></span> 
+
+<script>
+// ページがフォーカスを失ったときにアラートを表示
+window.addEventListener("blur", function() {
+  alert("サイトから離れました");
+});
+
+// ページにフォーカスが戻ったときに<span>要素にメッセージを表示
+window.addEventListener("focus", function() {
+  document.getElementById("fname").textContent = "フォーカスが戻りました"; // .valueの代わりに.textContentを使用
+});
+</script>
+
+</body>
+</html>
